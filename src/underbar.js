@@ -57,6 +57,8 @@
         iterator(collection[element], element, collection); 
       }
     }
+
+
   };
   //if the collection is array will iterate using for loop
   //  we will pass each index of the collection into the iterator function 
@@ -188,17 +190,20 @@
   //   }); // should be 5, regardless of the iterator function passed in
   //          No accumulator is given so the first element is used.
   _.reduce = function(collection, iterator, accumulator) {
-    var acc = accumulator || collection[0];
-    console.log(acc);
-    for (var i = 0; i < collection.length; i++) {
-      if ( !accumulator) {
-        acc = iterator(acc, collection[i]);
-      } else if (i !== 0 ) {
-        acc = iterator(acc, collection[i]);
-      }
+  let acc = accumulator;
+  let newArr = collection.slice(1);
+    if( accumulator === undefined ) {
+      acc = collection[0];
+      _.each(newArr, function (elem, index) {
+      acc = iterator(acc, elem, index);
+      });
+      return acc
     }
+    _.each(collection, function (elem, index) {
+        acc = iterator(acc, elem, index);
+    });
     return acc; 
-  };
+  } 
 
   // Determine if the array or object contains a given value (using `===`).
   _.contains = function(collection, target) {

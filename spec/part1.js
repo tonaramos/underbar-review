@@ -414,7 +414,7 @@
       });
     });
 
-    describe.only('reduce', function() {
+    describe('reduce', function() {
 
       it('should return a value', function() {
         var result = _.reduce([3, 2, 1], function(memo, item) { return item; });
@@ -467,7 +467,7 @@
         var orderTraversed = [];
 
         _.reduce([1, 2, 3, 4], function(memo, item) {
-          orderTraversed;
+          orderTraversed.push(item);
           return memo;
         }, 10);
 
@@ -500,7 +500,7 @@
       it('Should reduce by multiplying every number in the array', function() {
         var result = _.reduce([1, 2, 3], function(memo, item) {
           return memo * item;
-        }, 0);
+        });
 
         expect(result).to.equal(6);
       });
